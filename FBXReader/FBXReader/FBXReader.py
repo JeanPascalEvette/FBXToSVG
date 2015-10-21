@@ -33,6 +33,7 @@ def getVerticesCount(pathToFbx):
     sdk_manager, scene = FbxCommon.InitializeSdkObjects()
     if not FbxCommon.LoadScene(sdk_manager, scene, pathToFbx):
         print("error in LoadScene. File found : %s" % os.path.isfile(pathToFbx))
+        print("Current working directory : %s" % os.getcwd())
         
     counter = 0
     for u in range(scene.GetNodeCount()):
