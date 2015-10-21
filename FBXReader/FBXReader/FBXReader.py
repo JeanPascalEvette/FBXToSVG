@@ -32,7 +32,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 def getVerticesCount(pathToFbx):
     sdk_manager, scene = FbxCommon.InitializeSdkObjects()
     if not FbxCommon.LoadScene(sdk_manager, scene, pathToFbx):
-        print("error in LoadScene. File found : "+os.path.isfile(pathToFbx))
+        print("error in LoadScene. File found : %s" % os.path.isfile(pathToFbx))
         
     counter = 0
     for u in range(scene.GetNodeCount()):
