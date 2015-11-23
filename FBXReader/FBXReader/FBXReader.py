@@ -1,4 +1,4 @@
-import FbxCommon
+﻿import FbxCommon
 
 import time
 import BaseHTTPServer
