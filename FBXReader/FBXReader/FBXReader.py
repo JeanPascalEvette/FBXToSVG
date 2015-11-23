@@ -37,16 +37,28 @@ def getVerticesCount(pathToFbx):
         print("file directory : %s" % os.getcwd()+pathToFbx)
         
     counter = 0
+    lineCounter = 0
+    lineList = ""
     for u in range(scene.GetNodeCount()):
         node = scene.GetNode(u)
         for i in range(node.GetChildCount()):
             child = node.GetChild(i)
             counter += child.GetMesh().GetPolygonVertexCount()
+            lineCounter += child.GetMesh().GetMeshEdgeCount()
+            child.GetMesh().BeginGetMeshEdgeVertices()
+            for z in range(child.GetMesh().GetMeshEdgeCount()):
+                startIndex = -1
+                endIndex = -1
+                startIndex, endIndex = child.GetMesh().GetMeshEdgeVertices(z)
+                startVector = child.GetMesh().GetControlPointAt(startIndex)
+                endVector = child.GetMesh().GetControlPointAt(endIndex)
+                lineList += "<br/>" + str(startVector) + " - " + str(endVector)
+            child.GetMesh().EndGetMeshEdgeVertices()
             attr_type = child.GetNodeAttribute().GetAttributeType()
 
             if attr_type == FbxCommon.FbxNodeAttribute.eMesh:
                 print(child)
-    return counter
+    return (str(counter) + " edge count " + str(lineCounter) + lineList)
     
 
 httpd = BaseHTTPServer.HTTPServer(("localhost", 8000), MyHandler)
