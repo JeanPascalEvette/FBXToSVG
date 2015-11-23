@@ -1,4 +1,6 @@
 ﻿import FbxCommon
+import svgwrite
+
 
 import time
 import BaseHTTPServer
@@ -10,7 +12,17 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
   def do_GET(s):
-    if(s.path == "/favicon.ico"):
+
+    if s.path.endswith(".svg"):
+                        f=open(os.getcwd()+s.path)
+                        s.send_response(200)
+                        s.send_header('Content-type',        'image/svg+xml')
+                        s.end_headers()
+                        s.wfile.write(f.read())
+                        f.close()
+                        return
+
+    if(s.path == "/favicon.ico" or s.path == "/test.svg"):
         return
     """Respond to a GET request."""
     s.send_response(200)
@@ -20,12 +32,14 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     s.wfile.write("<body><p>This is a test.</p>")
 
 
-
-
-
     
     s.wfile.write("<p>You accessed path: %s</p>" % s.path)
     s.wfile.write("<p>Vertices Count: %s</p>" % getVerticesCount(s.path))
+    dwg = svgwrite.Drawing('test.svg', profile='tiny')
+    dwg.add(dwg.line((0, 0), (10, 0), stroke=svgwrite.rgb(10, 10, 16, '%')))
+    dwg.add(dwg.text('Test', insert=(0, 0.2), fill='red'))
+    dwg.save()
+    s.wfile.write("<object data=\"test.svg\" type=\"image/svg+xml\"></object>")
     s.wfile.write("</body></html>")
     
 
