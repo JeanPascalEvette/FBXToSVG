@@ -1,4 +1,4 @@
-import FbxCommon
+﻿import FbxCommon
 
 import time
 import BaseHTTPServer
@@ -49,7 +49,7 @@ def getVerticesCount(pathToFbx):
     return counter
     
 
-httpd = BaseHTTPServer.HTTPServer(("10.240.0.2", 8000), MyHandler)
+httpd = BaseHTTPServer.HTTPServer(("localhost", 8000), MyHandler)
 httpd.serve_forever()
 
 
