@@ -92,11 +92,11 @@ function rotateAboutY(radians)
 </script>
 
 
-<path stroke='#068706' fill='transparent' id='face-0' d=''/>
-<path stroke='#068706' fill='transparent' id='face-1' d=''/>
-<path stroke='#068706' fill='transparent' id='face-2' d=''/>
-<path stroke='#068706' fill='transparent' id='face-3' d=''/>
-<path stroke='#068706' fill='transparent' id='face-4' d=''/>
-<path stroke='#068706' fill='transparent' id='face-5' d=''/>
+<path stroke='#068706' fill='#068706' id='face-0' d=''/>
+<path stroke='#057e05' fill='#057e05' id='face-1' d=''/>
+<path stroke='#057505' fill='#057505' id='face-2' d=''/>
+<path stroke='#046c04' fill='#046c04' id='face-3' d=''/>
+<path stroke='#046304' fill='#046304' id='face-4' d=''/>
+<path stroke='#035a03' fill='#035a03' id='face-5' d=''/>
 
 </svg>

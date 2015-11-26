@@ -113,9 +113,11 @@ def drawLines(pathToFbx):
             svgContents += "\n\n]]>\n</script>\n\n"
 
             for n in range (child.GetMesh().GetPolygonCount()):
-                for k in range(child.GetMesh().GetPolygonVertexCount()):
-                    poly = FbxCommon.FbxPropertyDouble3(child.GetMesh().FindProperty("Color")).Get()
-                svgContents += "\n<path stroke='" + str('#%02x%02x%02x' % (clamp(poly[0]*255), clamp(poly[1]*255), clamp(poly[2]*255))) + "' fill='transparent' id='face-"+str(n)+"' d=''/>"
+                poly = FbxCommon.FbxPropertyDouble3(child.GetMesh().FindProperty("Color")).Get()
+                r = clamp(poly[0] * 255 - poly[0] * 0.4 * ((n+0.0) / child.GetMesh().GetPolygonCount()) * 255)
+                g = clamp(poly[1] * 255 - poly[1] * 0.4 * ((n+0.0) / child.GetMesh().GetPolygonCount()) * 255)
+                b = clamp(poly[2] * 255 - poly[2] * 0.4 * ((n+0.0) / child.GetMesh().GetPolygonCount()) * 255)
+                svgContents += "\n<path stroke='" + str('#%02x%02x%02x' % (r, g, b)) + "' fill='" + str('#%02x%02x%02x' % (r, g, b)) + "' id='face-"+str(n)+"' d=''/>"
             
             svgContents += "\n\n</svg>"
 
