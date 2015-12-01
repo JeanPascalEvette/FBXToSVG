@@ -37,37 +37,72 @@ centre_y = 50.0;
 centre_z = 0;
 
 
+
+	var minX = -999;
+	var minY = -999;
+	var maxX = -999;
+	var maxY = -999;
+
 function init(evt)
 {
 	if ( window.svgDocument == null )
 	{
 		svgDocument = evt.target.ownerDocument;
 	}
-	rotateAboutX(0.78539815);
-	rotateAboutY(0.78539815);
+	rotateAboutZ(-0.78539815);
+	rotateAboutX(-0.78539815);
 	calculateDepth()
 	drawBox();
-setViewBox();
-}function setViewBox()
+	setViewBox();
+if(minX < 0 || minY < 0)
 {
-	var minX = 0;
-	var minY = 0;
-	var maxX = 0;
-	var maxY = 0;
+	fixCoords();
+	drawBox();
+	setViewBox();
+}}
+
+
+function setViewBox()
+{
+	minX = -999;
+	minY = -999;
+	maxX = -999;
+	maxY = -999;
 	
 	for(var i = 0; i < x_coords.length; i++)
 	{
-		if(minX == 0 || x_coords[i] < minX)
+		if(minX == -999 || x_coords[i] < minX)
 			minX = x_coords[i];
-		if(minY == 0 || y_coords[i] < minY)
+		if(minY == -999 || y_coords[i] < minY)
 			minY = y_coords[i];
-		if(maxX == 0 || x_coords[i] > maxX)
+		if(maxX == -999 || x_coords[i] > maxX)
 			maxX = x_coords[i];
-		if(maxY == 0 || y_coords[i] > maxY)
+		if(maxY == -999 || y_coords[i] > maxY)
 			maxY = y_coords[i];
 	}
 	shape = document.getElementsByTagName('svg')[0];
 	shape.setAttribute('viewBox', minX+' '+ minY+' '+ maxX +' '+maxY);
+}
+
+
+function fixCoords()
+{
+	if(minX < 0)
+	{
+		centre_x += -minX;
+		for(var i = 0; i < x_coords.length;i++)
+		{
+			x_coords[i] += -minX;
+		}
+	}
+	if(minY < 0)
+	{
+		centre_y += -minY;
+		for(var i = 0; i < y_coords.length;i++)
+		{
+			y_coords[i] += -minY;
+		}
+	}
 }
 
 
@@ -139,7 +174,20 @@ function rotateAboutY(radians)
 		x_coords[i] = centre_x + d * Math.sin(theta);
 		z_coords[i] = centre_z + d * Math.cos(theta);
 	}
-	drawBox();
+}
+
+
+function rotateAboutZ(radians)
+{
+	for(var i=0; i<x_coords.length; i++)
+	{
+		x = x_coords[i] - centre_x;
+		y = y_coords[i] - centre_y;
+		d = Math.sqrt(x*x + y*y);
+		theta  = Math.atan2(x, y) + radians;
+		x_coords[i] = centre_x + d * Math.sin(theta);
+		y_coords[i] = centre_y + d * Math.cos(theta);
+	}
 }
 
 ]]>
