@@ -1,6 +1,5 @@
 ﻿import FbxCommon
 import math
-import svgwrite
 
 
 import time
