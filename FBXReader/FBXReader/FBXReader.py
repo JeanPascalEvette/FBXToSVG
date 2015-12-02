@@ -17,7 +17,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         post_body = json.loads(s.rfile.read(content_len))
                         s.send_response(200)
                         s.send_header('Content-type',        'text/html')
-                        s.end_headers()
+                        s.end_headers() 
         
                         s.wfile.write("OK")
   def do_GET(s):
