@@ -10,7 +10,7 @@ import urllib
 
 
 # example of a python class
- 
+  
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
   def do_POST(s):
