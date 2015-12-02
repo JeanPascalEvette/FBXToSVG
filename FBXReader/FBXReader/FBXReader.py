@@ -1,16 +1,41 @@
 ﻿import FbxCommon
 import math
-
+import json
 
 import time
 import BaseHTTPServer
 import os
+import urllib
+
+
 
 # example of a python class
- 
+  
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
+  def do_POST(s):
+                        content_len = int(s.headers.getheader('content-length', 0))
+                        post_body = json.loads(s.rfile.read(content_len))
+                        message = post_body['head_commit']['message']
+                        command = message.split(' ')[0]
+                        arg = message.split(' ')[1]
+                        if(command == 'adding'):
+                            fileName = "FBX/" + os.path.basename(arg)
+                            fileNameTest = fileName
+                            num = 1
+                            while(os.path.isfile(fileNameTest)):
+                                fileNameTest = fileName[:-4] + "(" + str(num) + ").fbx"
+                                num = num + 1
+                            fileName = fileNameTest
+                            urllib.urlretrieve(arg, fileName)
 
+
+
+                        s.send_response(200)
+                        s.send_header('Content-type',        'text/html')
+                        s.end_headers() 
+        
+                        s.wfile.write("OK")
   def do_GET(s):
       
     if s.path.endswith(".svg"):
