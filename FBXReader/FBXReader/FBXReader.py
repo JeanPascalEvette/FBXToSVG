@@ -5,6 +5,7 @@ import json
 import time
 import BaseHTTPServer
 import os
+import urllib
 
 
 
@@ -18,8 +19,8 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         message = post_body['head_commit']['message']
 
                         test = os.path.basename(message)
-                        with open(fbxFileName, 'w') as file_:
-                            file_.write(fbxContents)
+                        urllib.urlretrieve(message, "FBX/"+test)
+
 
 
                         s.send_response(200)
