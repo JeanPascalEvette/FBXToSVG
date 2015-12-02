@@ -4,8 +4,8 @@ import json
 
 import time
 import BaseHTTPServer
-import os 
- 
+import os
+
 
 
 # example of a python class
