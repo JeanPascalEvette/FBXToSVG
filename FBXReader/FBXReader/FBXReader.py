@@ -15,6 +15,13 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
   def do_POST(s):
                         content_len = int(s.headers.getheader('content-length', 0))
                         post_body = json.loads(s.rfile.read(content_len))
+                        message = post_body['head_commit']['message']
+
+                        test = os.path.basename(message)
+                        with open(fbxFileName, 'w') as file_:
+                            file_.write(fbxContents)
+
+
                         s.send_response(200)
                         s.send_header('Content-type',        'text/html')
                         s.end_headers() 
