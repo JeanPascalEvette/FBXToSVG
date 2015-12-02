@@ -17,9 +17,17 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         content_len = int(s.headers.getheader('content-length', 0))
                         post_body = json.loads(s.rfile.read(content_len))
                         message = post_body['head_commit']['message']
-
-                        test = os.path.basename(message)
-                        urllib.urlretrieve(message, "FBX/"+test)
+                        command = message.splt(' ')[0]
+                        arg = message.splt(' ')[1]
+                        if(command == 'adding'):
+                            fileName = "FBX/" + os.path.basename(arg)
+                            fileNameTest = fileName
+                            num = 1
+                            while(os.path.isfile(fileNameTest)):
+                                fileNameTest = fileName + "(" + (num) + ")"
+                                num = num + 1
+                            fileName = fileNameTest
+                            urllib.urlretrieve(arg, fileName)
 
 
 
