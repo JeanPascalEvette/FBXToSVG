@@ -8,7 +8,6 @@ onload='init(evt)'>
 <style>
 	svg
 {
-width:100%; height:auto;
 }
 .edge{
 		stroke: black;
@@ -143,7 +142,6 @@ function drawBox()
 		for(var u = 1; u < faces[depth[i]].length; u++)
 		{
 			d+= ' ' + 'L'+x_coords[faces[depth[i]][u]]+' '+y_coords[faces[depth[i]][u]];
-
 		}
 		d+= ' Z';
 		face.setAttributeNS(null, 'd', d);
