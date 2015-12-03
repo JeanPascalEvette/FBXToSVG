@@ -12,7 +12,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
 
   def do_GET(s):
-      
+       
     if s.path.endswith(".svg"):
                         f=open(os.getcwd()+s.path)
                         s.send_response(200)
