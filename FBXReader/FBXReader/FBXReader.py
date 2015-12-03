@@ -16,10 +16,15 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
   def do_POST(s):
                         content_len = int(s.headers.getheader('content-length', 0))
                         post_body = json.loads(s.rfile.read(content_len))
+                        test = post_body['head_commit']
+                        if(post_body['head_commit'] == None):
+                            return;
                         message = post_body['head_commit']['message']
+                        if(len(message.split(' ')) != 2):
+                            return;
                         command = message.split(' ')[0]
                         arg = message.split(' ')[1]
-                        if(command == 'adding'):
+                        if(command == 'adding' and arg[:4] == 'http'):
                             fileName = "FBX/" + os.path.basename(arg)
                             fileNameTest = fileName
                             num = 1
