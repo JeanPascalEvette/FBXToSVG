@@ -13,6 +13,8 @@ import urllib
   
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
      
+    #This class handles POST requests
+    #This is done for the GitHub WebHook queries
   def do_POST(s):
                         content_len = int(s.headers.getheader('content-length', 0))
                         post_body = json.loads(s.rfile.read(content_len))
@@ -22,16 +24,22 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         message = post_body['head_commit']['message']
                         if(len(message.split(' ')) != 2):
                             return;
+
+                        #After filtering bad queries
                         command = message.split(' ')[0]
                         arg = message.split(' ')[1]
+
+                        #Make sure that the command has the correct format
                         if(command == 'adding' and arg[:4] == 'http'):
                             fileName = "FBX/" + os.path.basename(arg)
                             fileNameTest = fileName
                             num = 1
+                            #Get a filename that doesnt exist
                             while(os.path.isfile(fileNameTest)):
                                 fileNameTest = fileName[:-4] + "(" + str(num) + ").fbx"
                                 num = num + 1
                             fileName = fileNameTest
+                            #Add the file to the folder
                             urllib.urlretrieve(arg, fileName)
 
 
@@ -43,6 +51,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         s.wfile.write("OK")
   def do_GET(s):
        
+      #IF it's an SVG or ICO file just read it
     if s.path.endswith(".svg"):
                         f=open(os.getcwd()+s.path)
                         s.send_response(200)
