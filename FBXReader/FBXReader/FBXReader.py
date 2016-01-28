@@ -100,7 +100,7 @@ def drawLines(pathToFbx):
 
     svgContents += "\n<script type='text/ecmascript'> \n<![CDATA[\n"
 
-    for u in range(scene.GetNodeCount()):  #blah
+    for u in range(scene.GetNodeCount()): 
         node = scene.GetNode(u)
         for i in range(node.GetChildCount()):
             child = node.GetChild(i)
