@@ -43,8 +43,8 @@ https://developer.github.com/webhooks/
 
 <b>Jean-Pascal Evette (SVG with ECMAScript):</b> https://github.com/JeanPascalEvette/FBXToSVG
 
-<b>Mircea Catana (SVG from Python):</b> https://github.com/adamjoyce/fbx-parser
+<b>Mircea Catana (SVG from Python):</b> https://github.com/mircea-catana/FBX_SVG
 
-<b>Adam Joyce (SVG with ECMAScript):</b> https://github.com/mircea-catana/FBX_SVG
+<b>Adam Joyce (SVG with ECMAScript):</b> https://github.com/adamjoyce/fbx-parser
 
 
