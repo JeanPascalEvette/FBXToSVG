@@ -22,6 +22,10 @@ The web-page is served up using a simple Python webserver which takes the FBX fi
 
 This application can also make use of a GitHub webhook to upload new pictures into the project. The webhook is designed to constantly monitor for new commits.  Whenever a commit is created, the webhook creates a POST request which is sent to the webpage.  This request contains information about the commit stored as a JSON object. In addition to the do_GET function, a do_POST function is implemented to handle the incoming requests from the webhook.  This function catches the comment from the latest commit and ensures that it conforms with the expected format for uploading new images.  If no problem arises, the FBX file linked in the comment will be downloaded and placed into the appropriate FBX folder.  The next time a user opens the page, the corresponding new SVG file will be created and its thumbnail will be displayed.
 
+![FBX Folder](http://www.jeanpascalevette.com/misc/GitHubPics/FBX.PNG)
+![FBX Folder](http://www.jeanpascalevette.com/misc/GitHubPics/SVG.PNG)
+![FBX Folder](http://www.jeanpascalevette.com/misc/GitHubPics/output.PNG)
+
 <h2>Method 2: SVG directly from Python</h2>
 
 The second method focuses on generating the SVG directly from the python script that makes use of the FBX SDK to read the model’s vertices.
